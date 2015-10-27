@@ -1,13 +1,14 @@
 package code;
 
 import java.io.IOException;
-
+import org.slf4j.*;
 import org.jsoup.*;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 public class Do {
+//	private slf4j logger=new slf4j();
 	void page(String PaperURL) throws IOException{	//这个方法和下面的list()取代了原本的list()，这是循环调用的方式，不会有大量的stack，性能更稳定
 		String nextLink=list(PaperURL);
 		while(nextLink!=null){
