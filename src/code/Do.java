@@ -5,6 +5,8 @@ import org.slf4j.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javafx.concurrent.Task;
+
 import org.jsoup.*;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -12,7 +14,7 @@ import org.jsoup.select.Elements;
 
 public class Do {
 	int count=0;
-	Logger logger = LoggerFactory.getLogger(Do.class);
+//	Logger logger = LoggerFactory.getLogger(Do.class);
 	void page(String PageURL) throws IOException, InterruptedException{	//这个方法和下面的list()取代了原本的list()，这是循环调用的方式，不会有大量的stack，性能更稳定
 		String nextLink=list(PageURL);
 		while(nextLink!=null){
@@ -34,7 +36,7 @@ public class Do {
 	}
 	void atricle(String artiUrl) throws IOException, InterruptedException {
 		Document doc=Jsoup.connect(artiUrl).get();
-		count++;
+		++count;
 		System.out.println("\n"+count+"URL---->>"+artiUrl);
 		Element title=doc.select("td.titlestyle67448").first();
 		System.out.println("《《"+title.text()+"》》");
@@ -44,12 +46,11 @@ public class Do {
 		System.out.println(text.text());
 		Elements images=doc.select("img[src]");
 		for(Element e:images){
-			System.out.println("\t"+e.attr("src"));
-		}
-		if(count>=40){
-			count=0;
-			Thread.sleep(5000);				
-		}
+			String img="www.zhzhu.edu.cn"+e.attr("src").split("\\.")[4]+"."+e.attr("src").split("\\.")[5];
+			System.out.println("\t"+img);//img 是文章里的图片链接
+		}		
+		Thread.sleep(500);	
+		//每次循环的时候暂停0.5秒，这样可以降低访问频率，不会被网站的安全机制屏蔽，
 	}
 
 //这是使用递归调用的方法，会产生大量的stack，
