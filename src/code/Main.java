@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 public class Main {
 	public static void main(String[] args) throws IOException, InterruptedException {
 		Do obj=new Do();
-//		System.setProperty(arg0, arg1);
 		Logger logger = LoggerFactory.getLogger(Main.class);
 		logger.debug("spider is start");
 		obj.page("http://www.zhzhu.edu.cn/index/xxxw.htm");

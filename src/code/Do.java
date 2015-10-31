@@ -19,7 +19,7 @@ public class Do {
 		}
 	}
 	String list(String PageURL) throws IOException, InterruptedException{		
-		Document doc=Jsoup.connect(PageURL).timeout(300000).get();
+		Document doc=Jsoup.connect(PageURL).timeout(300000).get();//设置了连接最大超出时间
 		Elements es_NSlink=doc.select("a.c67738");
 		for(Element e_NSlink:es_NSlink){
 			atricle(e_NSlink.absUrl("href"));
