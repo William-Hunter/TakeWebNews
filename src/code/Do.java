@@ -19,7 +19,7 @@ public class Do {
 		}
 	}
 	String list(String PageURL) throws IOException, InterruptedException{		
-		Document doc=Jsoup.connect(PageURL).get();
+		Document doc=Jsoup.connect(PageURL).timeout(300000).get();
 		Elements es_NSlink=doc.select("a.c67738");
 		for(Element e_NSlink:es_NSlink){
 			atricle(e_NSlink.absUrl("href"));
@@ -33,7 +33,7 @@ public class Do {
 		}	
 	}
 	void atricle(String artiUrl) throws IOException, InterruptedException {
-		Document doc=Jsoup.connect(artiUrl).get();
+		Document doc=Jsoup.connect(artiUrl).timeout(300000).get();
 		++count;
 		logger.debug(count+"\t"+artiUrl);
 		Element title=doc.select("td.titlestyle67448").first();
@@ -44,8 +44,8 @@ public class Do {
 		System.out.println(text.text());
 		Elements images=doc.select("img[src]");
 		for(Element e:images){
-			String img="www.zhzhu.edu.cn"+e.attr("src").split("\\.")[4]+"."+e.attr("src").split("\\.")[5];
-			System.out.println("\t"+img);//img 是文章里的图片链接
+//			String img="www.zhzhu.edu.cn"+e.attr("src").split("\\.")[4]+"."+e.attr("src").split("\\.")[5];
+			System.out.println("\t"+e.attr("src"));//img 是文章里的图片链接
 		}		
 		Thread.sleep(500);	
 		//每次循环的时候暂停0.5秒，这样可以降低访问频率，不会被网站的安全机制屏蔽，

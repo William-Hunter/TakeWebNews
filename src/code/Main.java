@@ -13,7 +13,7 @@ public class Main {
 		logger.debug("spider is start");
 		obj.page("http://www.zhzhu.edu.cn/index/xxxw.htm");
 //		obj.page("http://www.zhzhu.edu.cn/index/tzgg.htm");
-//		obj.atricle("http://www.zhzhu.edu.cn/info/1036/16577.htm");
+//		obj.atricle("http://www.zhzhu.edu.cn/info/1036/13582.htm");
 		logger.debug("spider is finish***********");
 	}
 }
