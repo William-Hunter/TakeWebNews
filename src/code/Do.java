@@ -10,8 +10,8 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 public class Do {
-	int count=0;
-
+	private int count=0;
+	Logger logger = LoggerFactory.getLogger(Do.class);
 	void page(String PageURL) throws IOException, InterruptedException{	//这个方法和下面的list()取代了原本的list()，这是循环调用的方式，不会有大量的stack，性能更稳定
 		String nextLink=list(PageURL);
 		while(nextLink!=null){
@@ -23,6 +23,7 @@ public class Do {
 		Elements es_NSlink=doc.select("a.c67738");
 		for(Element e_NSlink:es_NSlink){
 			atricle(e_NSlink.absUrl("href"));
+			System.out.println();
 		}
 		Element NextPage=doc.select("a.Next").first();
 		if(NextPage!=null){
@@ -34,7 +35,7 @@ public class Do {
 	void atricle(String artiUrl) throws IOException, InterruptedException {
 		Document doc=Jsoup.connect(artiUrl).get();
 		++count;
-		System.out.println("\n"+count+"URL---->>"+artiUrl);
+		logger.debug(count+"\t"+artiUrl);
 		Element title=doc.select("td.titlestyle67448").first();
 		System.out.println("《《"+title.text()+"》》");
 		Element time=doc.select("span.timestyle67448").first();
