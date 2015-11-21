@@ -47,8 +47,8 @@ public class Do {
 //			String img="www.zhzhu.edu.cn"+e.attr("src").split("\\.")[4]+"."+e.attr("src").split("\\.")[5];
 			System.out.println("\t"+e.attr("src"));//img 是文章里的图片链接
 		}		
-		Thread.sleep(500);	
-		//每次循环的时候暂停0.5秒，这样可以降低访问频率，不会被网站的安全机制屏蔽，
+		Thread.sleep(400);	
+		//每次循环的时候暂停0.4秒，这样可以降低访问频率，不会被网站的安全机制屏蔽，
 	}
 
 //这是使用递归调用的方法，会产生大量的stack，
