@@ -3,7 +3,6 @@ package code;
 import java.io.IOException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.jsoup.*;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -12,8 +11,8 @@ import org.jsoup.select.Elements;
 public class Do {
 	private int count=0;
 	Logger logger = LoggerFactory.getLogger(Do.class);
-	void page(String PageURL) throws IOException, InterruptedException{	//这个方法和下面的list()取代了原本的list()，这是循环调用的方式，不会有大量的stack，性能更稳定
-		String nextLink=list(PageURL);
+	void page(String pageURL) throws IOException, InterruptedException{	//这个方法和下面的list()取代了原本的list()，这是循环调用的方式，不会有大量的stack，性能更稳定
+		String nextLink=list(pageURL);
 		while(nextLink!=null){
 			nextLink=list(nextLink);
 		}
@@ -37,7 +36,7 @@ public class Do {
 		++count;
 		logger.debug(count+"\t"+artiUrl);
 		Element title=doc.select("td.titlestyle67448").first();
-		System.out.println("《《"+title.text()+"》》");
+		System.out.println("<<"+title.text()+">>");
 		Element time=doc.select("span.timestyle67448").first();
 		System.out.println(time.text());
 		Element text=doc.select("div#vsb_newscontent").first();
